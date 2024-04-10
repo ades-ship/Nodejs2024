@@ -19,3 +19,4 @@ const fs=require('fs')
 // fs.appendFileSync(path:'f2.txt')
 
 console.log("mesaage: updated file");
+console.log('now let end for today we will you tommorrow')
