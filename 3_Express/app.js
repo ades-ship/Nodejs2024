@@ -4,6 +4,9 @@ const express=require('express')
 
 const app=express();
 
+// its convert the raw data into json 
+app.use(express.json());
+
 app.get('/',(req,res)=>{
     res.send('hello express');
 })
@@ -15,8 +18,8 @@ app.get('/contact',(req,res)=>{
     res.send('contact adesh@156gmail.com')
 })
 
-const courses=[{
-    id:1,name:"python"},
+const courses=[
+    {id:1,name:"python"},
     {id:2,name:"dbms"},
     {id:3,name:"java"}
 ]
@@ -51,6 +54,27 @@ app.get('/courses/:coursename' , (req , res)=>{
     if(!course) res.status(404).send('The course you are looking for does not exist')
     res.send(course)
 })
+
+
+// get data of all the courses
+app.get('/courses',(req,res)=>{
+    res.send(courses)
+})
+
+// add or create new course to the application
+app.post('/courses' , (req , res)=>{
+    if (!req.body || !req.body.name) {
+        return res.status(400).send("Name is required in the request body.");
+    }
+
+    const course ={
+        id : courses.length +1,
+        name :  req.body.name
+    }
+      courses.push(course)
+      res.send(course)
+}) // Create
+
 
 const port=process.env.PORT || 3000
 
