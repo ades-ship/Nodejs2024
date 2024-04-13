@@ -14,6 +14,10 @@ app.get('/about',(req,res)=>{
 app.get('/contact',(req,res)=>{
     res.send('contact adesh@156gmail.com')
 })
+app.get('/courses/:id',(req,res)=>{
+    // console.log(res); i can see the whole response from the backend
+    res.send(req.params.id);  // this will render the response to the front end application
+})
 
 const port=process.env.PORT || 3000
 
