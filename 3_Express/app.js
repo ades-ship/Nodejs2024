@@ -53,7 +53,7 @@ app.get('/courses/:coursename' , (req , res)=>{
 
     if(!course) res.status(404).send('The course you are looking for does not exist')
     res.send(course)
-})
+})  // get
 
 
 // get data of all the courses
@@ -75,6 +75,17 @@ app.post('/courses' , (req , res)=>{
       res.send(course)
 }) // Create
 
+
+// update the data here is the course;
+app.put('/courses/:coursename' , (req , res)=>{
+    //console.log(req.params.coursename)
+    let course = courses.find(course => course.name === req.params.coursename)
+    
+
+    if(!course) res.status(404).send('The course you are looking for does not exist')
+    course.name=req.body.name;
+    res.send(course);
+}) // update
 
 const port=process.env.PORT || 3000
 
