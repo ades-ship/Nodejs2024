@@ -1,0 +1,2 @@
+to create package.json file run : npm init -y
+#install to package : npm install express
