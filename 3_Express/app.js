@@ -1,12 +1,22 @@
 // run the express nodemon server ->   npm run serve
+const customMiddleWare=require('./middleware/middle1');
+const morgan=require('morgan')
 const express=require('express')
+const customMiddleware2=require('./middleware/middle2');
 const app=express();
 // its convert the raw data into json 
 // getting the real touch with backend like how the CRUD operation performed through RESTAPI
+
+// middleware
 app.use(express.json());
+
+app.use(customMiddleWare)
+app.use(customMiddleware2)
 app.get('/',(req,res)=>{
     res.send('hello express');
+   
 })
+app.use(morgan('tiny'));
 app.get('/about',(req,res)=>{
     res.send('create the impact');
 })
