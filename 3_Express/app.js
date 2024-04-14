@@ -1,12 +1,9 @@
 // run the express nodemon server ->   npm run serve
-
 const express=require('express')
-
 const app=express();
-
 // its convert the raw data into json 
+// getting the real touch with backend like how the CRUD operation performed through RESTAPI
 app.use(express.json());
-
 app.get('/',(req,res)=>{
     res.send('hello express');
 })
@@ -18,6 +15,7 @@ app.get('/contact',(req,res)=>{
     res.send('contact adesh@156gmail.com')
 })
 
+// dummy data but in live web application this is how the resquest and resonse works in real time
 const courses=[
     {id:1,name:"python"},
     {id:2,name:"dbms"},
@@ -52,6 +50,7 @@ app.get('/courses/:coursename' , (req , res)=>{
     
 
     if(!course) res.status(404).send('The course you are looking for does not exist')
+    console.log(course)
     res.send(course)
 })  // get
 
@@ -86,6 +85,28 @@ app.put('/courses/:coursename' , (req , res)=>{
     course.name=req.body.name;
     res.send(course);
 }) // update
+
+
+
+app.delete('/courses/:coursename' , (req , res)=>{
+    let UpdatedCourses = courses.filter(course => course.name !== req.params.coursename)
+   
+    courses = UpdatedCourses
+     console.log(courses)
+    res.send(courses)
+})
+
+// delete by id
+app.delete('/courses/:id',(req,res)=>{
+    let updated=courses.find(course=> course.id === parseInt( req.params.id))
+    if(!updated) res.status(404).send('The course you are looking for does not exist')
+
+    const index=courses.indexOf(updated)
+    courses.splice(index,1)
+    console.log(updated);
+    // res.send(updated);
+    res.send(courses)
+})
 
 const port=process.env.PORT || 3000
 
